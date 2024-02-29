@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Опросы</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -52,5 +51,28 @@
             </a>
         </div>
     </main>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        let tg = window.Telegram.WebApp
+        let last_name1 = document.getElementById("Опрос 1")
+        let last_name2 = document.getElementById("Опрос 2")
+        let last_name3 = document.getElementById("Опрос 3")
+        let last_name4 = document.getElementById("Опрос 4")
+        let last_name5 = document.getElementById("Опрос 5")
+        let last_name6 = document.getElementById("Опрос 6")
+        let last_name7 = document.getElementById("Опрос 7")
+        let last_name8 = document.getElementById("Опрос 8")
+        let last_name9 = document.getElementById("Опрос 9")
+
+        last_name1.addEventListener("click", () => {
+
+            let last_name = "Фамилия 1"
+
+            let data = {
+                name: last_name
+            }
+            tg.sendData(JSON.stringify(data));
+        })
+    </script>
 </body>
 </html>
