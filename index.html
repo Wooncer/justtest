@@ -63,7 +63,9 @@
                 let data = {
                     employeeID: emloyeeId
                 }
-                tg.sendData(JSON.stringify(data))
+                tg.MainButton.text = 'Send data';
+                tg.MainButton.url = `/webappdata_${JSON.stringify(data)}`;
+                tg.MainButton.show();
             })
 
         })
