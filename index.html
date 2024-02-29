@@ -60,21 +60,14 @@
             button.addEventListener('click', (event) => {
                 event.preventDefault();
 
-                button.classList.add('button--pressed');
-
-
                 const emloyeeId = event.target.dataset.emloyeeId;
                 
                 let data = {
                     employeeID: emloyeeId
                 }
-                tg.sendData(JSON.stringify(data)).then(() => {
-                    setTimeout(() => {
-                        window.location.href = event.target.href;
-                    }, 1000);
-                }).finally(() => {
-                    button.classList.remove('button--pressed');
-                });
+                tg.sendData(JSON.stringify(data))
+                tg.close();
+                window.location.href = event.target.href;
             })
         })
     </script>
