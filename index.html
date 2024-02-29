@@ -50,25 +50,63 @@
                 <span>Фамилия 9</span>
             </a>
         </div>
+        <div class="modal" id="confirmModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="modalMessage"></p>
+                <div class="modal-buttons">
+                    <button class="confirm-button">Подтвердить</button>
+                    <button class="cancel-button">Отменить</button>
+                </div>
+            </div>
+        </div>
     </main>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        let tg = window.Telegram.WebApp
-        const employeeButtons = document.querySelector('.button-grid');
+        let tg = window.Telegram.WebApp;
+        const buttonGrid = document.querySelector('.button-grid');
+        const confirmModal = document.getElementById('confirmModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeModal = document.querySelector('.close');
+        const cancelButton = document.querySelector('.cancel-button');
 
-        button.addEventListener('click', (event) => {
+        buttonGrid.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A') {
             event.preventDefault();
 
-            const emloyeeId = event.target.dataset.emloyeeId;
-                
+            const employeeId = event.target.dataset.employeeId;
+            const linkHref = event.target.getAttribute('href');
+            const employeeName = event.target.querySelector('span').textContent;
+
+            modalMessage.textContent = `Вы уверены, что хотите выбрать сотрудника "${employeeName}" с ID ${employeeId}?`;
+            confirmModal.style.display = "block";
+
+            const confirmButton = document.querySelector('.confirm-button');
+            confirmButton.addEventListener('click', () => {
+      confirmModal.style.display = "none";
+
             let data = {
-                 employeeID: emloyeeId
+                employeeID: employeeId
             }
-            tg.sendData(JSON.stringify(data))
-            const newUrl = event.target.getAttribute('href');
-            window.location.href = newUrl;
-            
-        })
+            tg.sendData(JSON.stringify(data));
+            window.location.href = linkHref;
+            });
+        }
+        });
+
+        closeModal.addEventListener('click', () => {
+        confirmModal.style.display = "none";
+        });
+
+        cancelButton.addEventListener('click', () => {
+        confirmModal.style.display = "none";
+        });
+
+        window.addEventListener('click', (event) => {
+        if (event.target == confirmModal) {
+            confirmModal.style.display = "none";
+        }
+        });
     </script>
 </body>
 </html>
