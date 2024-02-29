@@ -60,6 +60,9 @@
             button.addEventListener('click', (event) => {
                 event.preventDefault();
 
+                button.classList.add('button--pressed');
+
+
                 const emloyeeId = event.target.dataset.emloyeeId;
                 
                 let data = {
@@ -69,7 +72,9 @@
                     setTimeout(() => {
                         window.location.href = event.target.href;
                     }, 1000);
-                })
+                }).finally(() => {
+                    button.classList.remove('button--pressed');
+                });
             })
         })
     </script>
