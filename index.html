@@ -66,8 +66,8 @@
                     employeeID: emloyeeId
                 }
                 tg.sendData(JSON.stringify(data))
-                tg.close();
-                window.location.href = event.target.href;
+                const newUrl = "calendar.html";
+                window.location.href = newUrl;
             })
         })
     </script>
