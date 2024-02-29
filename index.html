@@ -54,21 +54,20 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp
-        const employeeButtons = document.querySelectorAll('.button');
+        const employeeButtons = document.querySelector('.button-grid');
 
-        employeeButtons.forEach((button) => {
-            button.addEventListener('click', (event) => {
-                event.preventDefault();
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
 
-                const emloyeeId = event.target.dataset.emloyeeId;
+            const emloyeeId = event.target.dataset.emloyeeId;
                 
-                let data = {
-                    employeeID: emloyeeId
-                }
-                tg.sendData(JSON.stringify(data))
-                const newUrl = "calendar.html";
-                window.location.href = newUrl;
-            })
+            let data = {
+                 employeeID: emloyeeId
+            }
+            tg.sendData(JSON.stringify(data))
+            const newUrl = "calendar.html";
+            window.location.href = newUrl;
+            
         })
     </script>
 </body>
