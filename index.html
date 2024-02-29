@@ -58,16 +58,17 @@
 
         employeeButtons.forEach((button) => {
             button.addEventListener('click', (event) => {
+                event.preventDefault();
+
                 const emloyeeId = event.target.dataset.emloyeeId;
                 
                 let data = {
                     employeeID: emloyeeId
                 }
-                tg.MainButton.text = 'Send data';
-                tg.MainButton.url = `/webappdata_${JSON.stringify(data)}`;
-                tg.MainButton.show();
+                tg.sendData(JSON.stringify(data)).then(() => {
+                    window.location.href = event.target.href;
+                })
             })
-
         })
     </script>
 </body>
