@@ -66,7 +66,9 @@
                     employeeID: emloyeeId
                 }
                 tg.sendData(JSON.stringify(data)).then(() => {
-                    window.location.href = event.target.href;
+                    setTimeout(() => {
+                        window.location.href = event.target.href;
+                    }, 1000);
                 })
             })
         })
