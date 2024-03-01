@@ -69,7 +69,6 @@
         const modalMessage = document.getElementById('modalMessage');
         const closeModal = document.querySelector('.close');
         const cancelButton = document.querySelector('.cancel-button');
-        const confirmButton = document.querySelector('.confirm-button');
 
         buttonGrid.addEventListener('click', (event) => {
             if (event.target.tagName === 'BUTTON') {
@@ -80,23 +79,23 @@
 
                 modalMessage.textContent = `Вы уверены, что хотите выбрать сотрудника "${employeeName}" с ID ${employeeId}?`;
                 confirmModal.style.display = "block";
-            }
-        })    
-        
-        confirmButton.addEventListener('click', () => {
-            confirmModal.style.display = "none";
 
-            let data = {
-                employeeID: employeeId
+                const confirmButton = document.querySelector('.confirm-button');
+                confirmButton.addEventListener('click', () => {
+                    confirmModal.style.display = "none";
+
+                    let data = {
+                        employeeID: employeeId
+                    }
+                    const jsonData = JSON.stringify(data)
+                    localStorage.setItem('userData', jsonData)
+                    // tg.sendData(JSON.stringify(data));
+                    // Удалите или измените следующую строку, если нужно изменить переход на другую страницу
+                    let linkHref = 'calendar.html' 
+                    window.location.href = linkHref;
+                });
             }
-            const jsonData = JSON.stringify(data)
-            localStorage.setItem('userData', jsonData)
-            // tg.sendData(JSON.stringify(data));
-            // Удалите или измените следующую строку, если нужно изменить переход на другую страницу
-            let linkHref = 'calendar.html' 
-            window.location.href = linkHref;
         });
-            
 
         closeModal.addEventListener('click', () => {
             confirmModal.style.display = "none";
