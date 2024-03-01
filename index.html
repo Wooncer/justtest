@@ -71,11 +71,16 @@
         const cancelButton = document.querySelector('.cancel-button');
 
         buttonGrid.addEventListener('click', (event) => {
-            if (event.target.tagName === 'BUTTON') {
+            let target = event.target;
+            while (target && target.tagName !== 'BUTTON') {
+                target = target.parentNode;
+            }
+            if (target) {
                 event.preventDefault();
+            
 
-                const employeeId = event.target.dataset.employeeId;
-                const employeeName = event.target.querySelector('span').textContent;
+                const employeeId = target.dataset.employeeId;
+                const employeeName = target.querySelector('span').textContent;
 
                 modalMessage.textContent = `Вы уверены, что хотите выбрать сотрудника "${employeeName}" с ID ${employeeId}?`;
                 confirmModal.style.display = "block";
@@ -95,6 +100,7 @@
                     window.location.href = linkHref;
                 });
             }
+            target = null;
         });
 
         closeModal.addEventListener('click', () => {
