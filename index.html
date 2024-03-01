@@ -87,8 +87,11 @@
                     let data = {
                         employeeID: employeeId
                     }
-                    tg.sendData(JSON.stringify(data));
+                    const jsonData = JSON.stringify(data)
+                    localStorage.setItem('userData', jsonData)
+                    // tg.sendData(JSON.stringify(data));
                     // Удалите или измените следующую строку, если нужно изменить переход на другую страницу
+                    let linkHref = 'calendar.html' 
                     window.location.href = linkHref;
                 });
             }

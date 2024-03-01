@@ -65,6 +65,13 @@ calendarDays.addEventListener("click", (e) => {
 
   const confirmation = confirm(`Вы выбрали дату: ${selectedDate}-${selectedMonth}-${selectedYear}. Подтвердите выбор?`);
   if (confirmation) {
+    const jsonData = localStorage.getItem('userData')
+    let userData = JSON.parse(jsonData)
+    userData.sday = selectedDate
+    userData.smonth = selectedMonth
+    userData.syear = selectedYear
+    let tg = window.Telegram.WebApp;
+    tg.sendData(JSON.stringify(userData));
     // Здесь можно добавить логику передачи выбранной даты в бота
     console.log(`Дата: ${selectedDate}-${selectedMonth}-${selectedYear}`);
   }
