@@ -13,15 +13,18 @@ function updateCalendar() {
   const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
   const daysInMonth = lastDayOfMonth.getDate();
   const daysInPreviousMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
-  const dayOfWeek = firstDayOfMonth.getDay();
+
+  let dayOfWeek = firstDayOfMonth.getDay();
+  if (dayOfWeek === 0) dayOfWeek = 7; // Воскресенье считаем последним днем недели
+  dayOfWeek -= 1; // Из остальных дней вычитаем 1, чтобы сделать понедельник первым днем недели
 
   monthYear.textContent = currentDate.toLocaleString("default", { month: "long", year: "numeric" });
 
   calendarDays.innerHTML = "";
 
-  for (let i = dayOfWeek - 1; i >= 0; i--) {
+  for (let i = dayOfWeek; i > 0; i--) {
     const day = document.createElement("div");
-    day.textContent = daysInPreviousMonth - i;
+    day.textContent = daysInPreviousMonth - i + 1;
     day.classList.add("previous-month", "inactive");
     calendarDays.appendChild(day);
   }
@@ -35,7 +38,7 @@ function updateCalendar() {
     calendarDays.appendChild(day);
   }
 
-  const remainingDays = 42 - (dayOfWeek + daysInMonth);
+  const remainingDays = 35 - (dayOfWeek + daysInMonth);
   for (let i = 1; i <= remainingDays; i++) {
     const day = document.createElement("div");
     day.textContent = i;
@@ -43,6 +46,9 @@ function updateCalendar() {
     calendarDays.appendChild(day);
   }
 }
+
+
+
 
 prevMonthBtn.addEventListener("click", () => {
   currentDate.setMonth(currentDate.getMonth() - 1);
