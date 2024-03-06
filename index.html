@@ -82,7 +82,7 @@
                 const employeeId = target.dataset.employeeId;
                 const employeeName = target.querySelector('span').textContent;
 
-                modalMessage.textContent = `Вы уверены, что хотите выбрать сотрудника "${employeeName}" с ID ${employeeId}?`;
+                modalMessage.textContent = `Вы уверены, что хотите выбрать сотрудника "${employeeName}"`;
                 confirmModal.style.display = "block";
 
                 const confirmButton = document.querySelector('.confirm-button');
@@ -90,7 +90,7 @@
                     confirmModal.style.display = "none";
 
                     let data = {
-                        employeeID: employeeId
+                        employeeID: employeeName
                     }
                     const jsonData = JSON.stringify(data)
                     localStorage.setItem('userData', jsonData)

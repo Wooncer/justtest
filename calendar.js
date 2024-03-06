@@ -71,13 +71,46 @@ calendarDays.addEventListener("click", (e) => {
 
   const confirmation = confirm(`Вы выбрали дату: ${selectedDate}-${selectedMonth}-${selectedYear}. Подтвердите выбор?`);
   if (confirmation) {
-    const jsonData = localStorage.getItem('userData')
-    let userData = JSON.parse(jsonData)
-    userData.sday = selectedDate
-    userData.smonth = selectedMonth
-    userData.syear = selectedYear
-    let tg = window.Telegram.WebApp;
-    tg.sendData(JSON.stringify(userData));
+    let jsonData;
+
+    try {
+      // Получение данных из localStorage
+      const localData = localStorage.getItem('userData');
+
+      // Проверка наличия данных в localStorage
+      if (localData) {
+    // Парсинг данных из localStorage в объект JSON
+        jsonData = JSON.parse(localData);
+      } else {
+        throw new Error('Данные не найдены');
+      }
+    } catch (error) {
+      // Вывод сообщения об ошибке при получении или парсинге данных из localStorage
+      alert('Ошибка получения данных: ' + error.message);
+      return;
+    }
+
+    // Добавление выбранной даты в объект с данными пользователя
+    jsonData.sday = selectedDate;
+    jsonData.smonth = selectedMonth;
+    jsonData.syear = selectedYear;
+
+    // Отправка данных в телеграмм бота
+    try {
+      // Отправка данных с помощью метода sendData телеграмм бота
+      const tg = window.Telegram.WebApp;
+      tg.sendData(JSON.stringify(jsonData));
+    } catch (error) {
+      // Вывод сообщения об ошибке отправки данных
+      alert('Ошибка отправки данных: ' + error.message);
+    }
+    //const jsonData = localStorage.getItem('userData')
+    //let userData = JSON.parse(jsonData)
+    //userData.sday = selectedDate
+    //userData.smonth = selectedMonth
+    //userData.syear = selectedYear
+    //let tg = window.Telegram.WebApp;
+    //tg.sendData(JSON.stringify(userData));
     // Здесь можно добавить логику передачи выбранной даты в бота
     console.log(`Дата: ${selectedDate}-${selectedMonth}-${selectedYear}`);
   }
