@@ -116,3 +116,9 @@ main {
 .cancel-button {
   background-color: #f44336;
 }
+
+@media only screen and (max-width: 767px) {
+  .button-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
